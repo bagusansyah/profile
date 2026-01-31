@@ -1,6 +1,7 @@
 "use client";
 
-import dynamic from 'next/dynamic';
+import Image from "next/image";
+import dynamic from 'next/dynamic'; // Import cukup satu kali saja
 import { motion } from "framer-motion";
 import { 
   Github, Linkedin, Mail, MapPin, Calendar, 
@@ -10,7 +11,6 @@ import {
 import Link from "next/link";
 
 // --- FIX: Import GitHubCalendar secara Dynamic untuk mengatasi error Build & SSR ---
-// Kode ini memaksa Next.js mengambil 'GitHubCalendar' (Named Export) dan mematikan SSR.
 const GitHubCalendar = dynamic(
   () => import('react-github-calendar').then((mod) => mod.GitHubCalendar),
   { 
@@ -23,7 +23,7 @@ export default function Home() {
   // --- DATA PENGGUNA ---
   const user = {
     name: "Bagus Nadiansah",
-    username: "bagusansyah", // Pastikan username ini benar agar grafik muncul
+    username: "bagusansyah", 
     role: "AI & Full-Stack Engineer",
     bio: "Software Engineer yang fokus pada integrasi AI dan Web Development. Berpengalaman membangun sistem skalabel dengan React, Node.js, dan Python.",
     location: "Malang, Indonesia",
@@ -84,9 +84,19 @@ export default function Home() {
           {/* Profile Card */}
           <div className="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-2xl p-6 shadow-xl">
             <div className="flex flex-col items-center text-center">
-              <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-neutral-700 bg-neutral-800 flex items-center justify-center text-5xl mb-4 shadow-2xl">
-                👋
+              
+              {/* --- FOTO PROFIL --- */}
+              {/* Pastikan file 'profile.jpg' sudah ada di folder 'public' */}
+              <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-neutral-700 bg-neutral-800 shadow-2xl mb-4">
+                <Image 
+                  src="/foto-profil.jpg" 
+                  alt={user.name}
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
+
               <h1 className="text-2xl font-bold text-white">{user.name}</h1>
               <p className="text-emerald-400 font-medium mb-4">{user.role}</p>
               
@@ -95,13 +105,11 @@ export default function Home() {
                 <SocialLink href="https://github.com" icon={<Github size={18} />} />
                 <SocialLink href="https://linkedin.com" icon={<Linkedin size={18} />} />
                 
-                {/* Email Logo Only */}
                 <SocialLink 
                   href={`https://mail.google.com/mail/?view=cm&fs=1&to=${user.email}`} 
                   icon={<Mail size={18} />} 
                 />
                 
-                {/* Discord Logo Asli (Copy ID) */}
                 <button 
                   onClick={() => {
                     navigator.clipboard.writeText(user.discord);
@@ -170,7 +178,7 @@ export default function Home() {
             ))}
           </motion.div>
 
-          {/* GitHub Contributions Graph (Calendar Style) */}
+          {/* GitHub Contributions Graph */}
           <motion.div
              initial={{ opacity: 0, y: 10 }}
              animate={{ opacity: 1, y: 0 }}
@@ -181,7 +189,6 @@ export default function Home() {
                 <Github size={18} className="text-white"/> Contributions
              </h3>
              
-             {/* Menggunakan Client-Side Only Component untuk Grafik */}
              <div className="flex justify-center w-full overflow-x-auto custom-scrollbar pb-2">
                 <GitHubCalendar 
                   username={user.username} 
@@ -189,30 +196,16 @@ export default function Home() {
                   blockSize={13} 
                   blockMargin={4} 
                   fontSize={14}
-                  style={{
-                    color: '#a3a3a3',
-                  }}
+                  style={{ color: '#a3a3a3' }}
                   theme={{
-                    dark: [
-                      '#161b22', // Level 0
-                      '#0e4429', // Level 1
-                      '#006d32', // Level 2
-                      '#26a641', // Level 3
-                      '#39d353', // Level 4
-                    ],
+                    dark: [ '#161b22', '#0e4429', '#006d32', '#26a641', '#39d353' ],
                   }}
                 />
              </div>
              
              <div className="flex justify-between items-center mt-4 border-t border-neutral-800 pt-3">
-               <p className="text-xs text-neutral-500">
-                 Total contributions in the last year
-               </p>
-               <a 
-                 href={`https://github.com/${user.username}`} 
-                 target="_blank" 
-                 className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors"
-               >
+               <p className="text-xs text-neutral-500">Total contributions in the last year</p>
+               <a href={`https://github.com/${user.username}`} target="_blank" className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
                  View GitHub Profile →
                </a>
              </div>
@@ -280,21 +273,15 @@ export default function Home() {
   );
 }
 
-// Komponen Helper Social Link
+// --- KOMPONEN KECIL (HELPER) ---
 function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
   return (
-    <a 
-      href={href} 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="p-2.5 bg-neutral-800 rounded-full text-neutral-400 hover:bg-white hover:text-black transition-all"
-    >
+    <a href={href} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-neutral-800 rounded-full text-neutral-400 hover:bg-white hover:text-black transition-all">
       {icon}
     </a>
   );
 }
 
-// Komponen Helper Info Row
 function InfoRow({ icon, label, value, isLink }: { icon: any, label: string, value: string, isLink?: boolean }) {
   return (
     <div className="flex items-center justify-between py-1 group">
@@ -311,17 +298,9 @@ function InfoRow({ icon, label, value, isLink }: { icon: any, label: string, val
   );
 }
 
-// Komponen Logo Discord Orisinil (SVG)
 function DiscordIcon({ size = 20, className = "" }: { size?: number, className?: string }) {
   return (
-    <svg 
-      width={size} 
-      height={size} 
-      viewBox="0 0 127.14 96.36" 
-      className={className}
-      fill="currentColor" 
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width={size} height={size} viewBox="0 0 127.14 96.36" className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.11,77.11,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22c.63-23.28-1.24-47.53-18.9-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
     </svg>
   );
