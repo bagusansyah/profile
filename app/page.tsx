@@ -80,11 +80,11 @@ export default function Home() {
           <div className="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-2xl p-6 shadow-xl">
             <div className="flex flex-col items-center text-center">
               
-              {/* --- FOTO PROFIL FIX --- */}
+              {/* --- BAGIAN FOTO PROFIL LOKAL --- */}
+              {/* Pastikan file 'foto-profil.jpg' ada di folder 'public' */}
               <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-neutral-700 bg-neutral-800 shadow-2xl mb-4">
                 <Image 
-                  // Perbaikan: Hapus "/public" dan sesuaikan nama file jadi pakai strip
-                  src="/foto-profil.jpg" 
+                  src="/fotoprofil.jpg" 
                   alt={user.name}
                   fill
                   className="object-cover"
