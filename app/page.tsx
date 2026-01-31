@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import dynamic from 'next/dynamic'; // Import cukup satu kali saja
+import dynamic from 'next/dynamic';
 import { motion } from "framer-motion";
 import { 
   Github, Linkedin, Mail, MapPin, Calendar, 
@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-// --- FIX: Import GitHubCalendar secara Dynamic untuk mengatasi error Build & SSR ---
 const GitHubCalendar = dynamic(
   () => import('react-github-calendar').then((mod) => mod.GitHubCalendar),
   { 
@@ -20,7 +19,6 @@ const GitHubCalendar = dynamic(
 );
 
 export default function Home() {
-  // --- DATA PENGGUNA ---
   const user = {
     name: "Bagus Nadiansah",
     username: "bagusansyah", 
@@ -31,7 +29,6 @@ export default function Home() {
     email: "bagusnadiansah@gmail.com",
     discord: "bagus#1234", 
     
-    // Stats Dashboard
     stats: [
       { label: "Total Views", value: "24.5K", icon: <Eye size={16} className="text-blue-400" /> },
       { label: "Followers", value: "1,234", icon: <Hash size={16} className="text-purple-400" /> },
@@ -74,21 +71,19 @@ export default function Home() {
     <div className="min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        {/* === KOLOM KIRI (PROFILE SIDEBAR) === */}
         <motion.aside 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
           className="lg:col-span-4 space-y-6"
         >
-          {/* Profile Card */}
           <div className="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-2xl p-6 shadow-xl">
             <div className="flex flex-col items-center text-center">
               
-              {/* --- FOTO PROFIL --- */}
-              {/* Pastikan file 'profile.jpg' sudah ada di folder 'public' */}
+              {/* --- FOTO PROFIL FIX --- */}
               <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-neutral-700 bg-neutral-800 shadow-2xl mb-4">
                 <Image 
+                  // Perbaikan: Hapus "/public" dan sesuaikan nama file jadi pakai strip
                   src="/foto-profil.jpg" 
                   alt={user.name}
                   fill
@@ -100,7 +95,6 @@ export default function Home() {
               <h1 className="text-2xl font-bold text-white">{user.name}</h1>
               <p className="text-emerald-400 font-medium mb-4">{user.role}</p>
               
-              {/* Social Icons Row */}
               <div className="flex justify-center gap-3 mb-6">
                 <SocialLink href="https://github.com" icon={<Github size={18} />} />
                 <SocialLink href="https://linkedin.com" icon={<Linkedin size={18} />} />
@@ -122,7 +116,6 @@ export default function Home() {
                 </button>
               </div>
 
-              {/* Info Detail */}
               <div className="w-full border-t border-neutral-800 pt-6 text-left space-y-3 text-sm">
                 <InfoRow icon={<MapPin size={16}/>} label="Location" value={user.location} />
                 <InfoRow icon={<Calendar size={16}/>} label="Joined" value={user.joined} />
@@ -130,7 +123,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Skills Card */}
           <div className="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-2xl p-6">
             <h3 className="font-bold text-white mb-4 flex items-center gap-2">
               <Terminal size={18} className="text-purple-500"/> Skills
@@ -145,10 +137,7 @@ export default function Home() {
           </div>
         </motion.aside>
 
-        {/* === KOLOM KANAN (MAIN DASHBOARD) === */}
         <div className="lg:col-span-8 space-y-6">
-          
-          {/* About Me */}
           <motion.div 
             initial={{ opacity: 0, y: 10 }} 
             animate={{ opacity: 1, y: 0 }}
@@ -160,7 +149,6 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* Stats Grid */}
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -178,7 +166,6 @@ export default function Home() {
             ))}
           </motion.div>
 
-          {/* GitHub Contributions Graph */}
           <motion.div
              initial={{ opacity: 0, y: 10 }}
              animate={{ opacity: 1, y: 0 }}
@@ -188,7 +175,6 @@ export default function Home() {
              <h3 className="font-bold text-white mb-6 flex items-center gap-2">
                 <Github size={18} className="text-white"/> Contributions
              </h3>
-             
              <div className="flex justify-center w-full overflow-x-auto custom-scrollbar pb-2">
                 <GitHubCalendar 
                   username={user.username} 
@@ -202,7 +188,6 @@ export default function Home() {
                   }}
                 />
              </div>
-             
              <div className="flex justify-between items-center mt-4 border-t border-neutral-800 pt-3">
                <p className="text-xs text-neutral-500">Total contributions in the last year</p>
                <a href={`https://github.com/${user.username}`} target="_blank" className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
@@ -212,7 +197,6 @@ export default function Home() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Featured Projects */}
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -242,7 +226,6 @@ export default function Home() {
               </Link>
             </motion.div>
 
-            {/* Recent Activity */}
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -273,7 +256,6 @@ export default function Home() {
   );
 }
 
-// --- KOMPONEN KECIL (HELPER) ---
 function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-neutral-800 rounded-full text-neutral-400 hover:bg-white hover:text-black transition-all">
