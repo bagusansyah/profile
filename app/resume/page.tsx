@@ -10,9 +10,6 @@ export default function Resume() {
         <h2 className="text-3xl font-bold flex items-center gap-3">
           <FileText className="text-emerald-500" /> Resume
         </h2>
-        <button className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-full text-sm font-semibold hover:bg-neutral-200 transition-colors">
-          <Download size={16} /> Download CV
-        </button>
       </div>
 
       <div className="space-y-12">
@@ -25,13 +22,14 @@ export default function Resume() {
             <div className="relative">
               <div className="absolute -left-[31px] w-4 h-4 rounded-full bg-emerald-500 border-4 border-neutral-950"></div>
               <h4 className="text-lg font-medium text-white">Informatics Engineering</h4>
-              <p className="text-neutral-500 text-sm mb-2">Universitas [Nama Kampus Kamu] • 2023 - Present</p>
+              <p className="text-neutral-500 text-sm mb-2">Universitas Institut Teknologi dan Bisnis Asia Malang • 2023 - Sekarang</p>
               <p className="text-neutral-400 text-sm">
                 Mahasiswa Semester 5 dengan fokus pada Artificial Intelligence dan Web Development.
                 Aktif dalam proyek-proyek praktikum Computer Vision dan GIS.
               </p>
             </div>
           </div>
+          
         </section>
 
         {/* Experience / Skills Section */}

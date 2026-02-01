@@ -27,7 +27,7 @@ export default function Home() {
     location: "Malang, Indonesia",
     joined: "March 2023",
     email: "bagusnadiansah@gmail.com",
-    discord: "bagus#1234", 
+    discord: "527742457853640725", 
     
     stats: [
       { label: "Total Views", value: "24.5K", icon: <Eye size={16} className="text-blue-400" /> },
@@ -96,24 +96,23 @@ export default function Home() {
               <p className="text-emerald-400 font-medium mb-4">{user.role}</p>
               
               <div className="flex justify-center gap-3 mb-6">
-                <SocialLink href="https://github.com" icon={<Github size={18} />} />
-                <SocialLink href="https://linkedin.com" icon={<Linkedin size={18} />} />
+                <SocialLink href="https://github.com/bagusansyah/" icon={<Github size={18} />} />
+                <SocialLink href="https://www.linkedin.com/in/bagusnadiansah/" icon={<Linkedin size={18} />} />
                 
                 <SocialLink 
-                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${user.email}`} 
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=bagusnadiansahpb@gmail.com" 
                   icon={<Mail size={18} />} 
                 />
                 
-                <button 
-                  onClick={() => {
-                    navigator.clipboard.writeText(user.discord);
-                    alert(`Discord ID copied: ${user.discord}`);
-                  }}
+                <a 
+                  href={user.discord}
+                  target="_blank" 
+                  rel="noopener noreferrer"
                   className="p-2.5 bg-neutral-800 rounded-full text-neutral-400 hover:bg-[#5865F2] hover:text-white transition-all cursor-pointer flex items-center justify-center" 
-                  title="Copy Discord ID"
+                  title="Open Discord Profile"
                 >
                    <DiscordIcon size={18} />
-                </button>
+                </a>
               </div>
 
               <div className="w-full border-t border-neutral-800 pt-6 text-left space-y-3 text-sm">
