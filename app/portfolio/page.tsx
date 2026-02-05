@@ -30,6 +30,15 @@ export default function Portfolio() {
       color: "bg-orange-500",
       link: "https://youtu.be/UWYURhkLjuE",
       type: "youtube"
+    },
+    {
+      title: "Cari Tim App",
+      desc: "Aplikasi pencarian tim programmer berbasis web dengan fitur pencarian dan komunikasi menggunakan discord.",
+      stack: ["Flutter", "Dart", "Firebase"],
+      year: "2026",
+      color: "bg-orange-500",
+      link: "https://caritim-app.web.app/",
+      type: "App"
     }
   ];
 
