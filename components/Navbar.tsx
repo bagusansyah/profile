@@ -16,7 +16,10 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:top-6 md:bottom-auto">
+    <nav
+      aria-label="Primary navigation"
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:top-6 md:bottom-auto"
+    >
       <div className="flex items-center gap-1 p-2 bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-full shadow-2xl">
         {navItems.map((item) => {
           const isActive = pathname === item.path;
@@ -30,6 +33,7 @@ export default function Navbar() {
                   ? "bg-neutral-100 text-neutral-900 shadow-lg"
                   : "text-neutral-400 hover:text-white hover:bg-neutral-800"
               )}
+              aria-current={isActive ? "page" : undefined}
             >
               {item.icon}
               <span className="hidden md:inline">{item.name}</span>
