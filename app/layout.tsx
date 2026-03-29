@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [absoluteUrl(siteConfig.socialImage)],
   },
+  verification: {
+    google: "JEf6J3wnjl3L6KdGPfX7ZborBwfetVfQkqtS0_fQjTA",
+  },
   robots: {
     index: true,
     follow: true,
