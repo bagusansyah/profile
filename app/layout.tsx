@@ -61,6 +61,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="id">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="JEf6J3wnjl3L6KdGPfX7ZborBwfetVfQkqtS0_fQjTA"
+        />
+      </head>
       <body className="antialiased bg-neutral-950 text-neutral-200">
         <div className="fixed inset-0 z-0 opacity-20 pointer-events-none overflow-hidden">
           <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-600 rounded-full blur-3xl animate-blob" />
