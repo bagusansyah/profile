@@ -43,12 +43,6 @@ const user = {
   joined: "Maret 2023",
   email: "bagusnadiansahpb@gmail.com",
   discordProfile: "https://discord.com/users/527742457853640725",
-  stats: [
-    { label: "Total Views", value: "24.5K", icon: <Eye size={16} className="text-blue-400" /> },
-    { label: "Followers", value: "1,234", icon: <Hash size={16} className="text-purple-400" /> },
-    { label: "Projects", value: "12", icon: <Code2 size={16} className="text-emerald-400" /> },
-    { label: "Exp (Yrs)", value: "3+", icon: <Calendar size={16} className="text-orange-400" /> },
-  ],
   skills: [
     "React",
     "Next.js",
@@ -146,9 +140,9 @@ export default function HomePageClient() {
         >
           <section className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-6 shadow-xl backdrop-blur-sm">
             <div className="flex flex-col items-center text-center">
-              <div className="relative mb-4 h-32 w-32 overflow-hidden rounded-full border-2 border-neutral-700 bg-neutral-800 shadow-2xl">
+              <div className="relative mb-4 h-32 w-32 overflow-hidden rounded-full border-2 border-neutral-100 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 shadow-2xl">
                 <Image
-                  src="/fotoprofil.jpg"
+                  src="/profilePicture.jpg"
                   alt={`Portrait of ${user.name}`}
                   fill
                   className="object-cover"
@@ -211,27 +205,6 @@ export default function HomePageClient() {
             <p className="leading-relaxed text-neutral-400">{user.bio}</p>
           </motion.section>
 
-          <motion.section
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="grid grid-cols-2 gap-4 md:grid-cols-4"
-          >
-            {user.stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex flex-col justify-between rounded-xl border border-neutral-800 bg-neutral-900/50 p-4 transition-colors hover:bg-neutral-800/50"
-              >
-                <div className="mb-2 flex items-start justify-between">
-                  <span className="text-xs font-medium uppercase text-neutral-500">
-                    {stat.label}
-                  </span>
-                  {stat.icon}
-                </div>
-                <span className="text-2xl font-bold text-white">{stat.value}</span>
-              </div>
-            ))}
-          </motion.section>
 
           <motion.section
             initial={{ opacity: 0, y: 10 }}
