@@ -32,7 +32,7 @@ export default function Home() {
       name: "Bagus Nadiansah",
       jobTitle: "AI & Full-Stack Engineer",
       description: siteConfig.description,
-      image: absoluteUrl("/fotoprofil.jpg"),
+      image: absoluteUrl("/profilePicture.jpg"),
       url: absoluteUrl("/"),
       sameAs: [
         "https://github.com/bagusansyah/",
